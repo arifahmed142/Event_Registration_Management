@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Md. Arif Ahmed">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Grand Event</title>
+    <title>{% block title %}
+    Event Template
+    {% endblock title %}</title>
 </head>
-<body>
-    {% include "header.html" %}
+<body class="">
+    {% include "Page_Components/header.html" %}
+    <main>
+        {% block content %}
     
-    {% include "footer.html" %}
+        {% endblock content %}
+    </main>
+    {% include "Page_Components/footer.html" %}
 </body>
 </html>
