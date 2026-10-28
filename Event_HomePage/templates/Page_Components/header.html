@@ -1,14 +1,19 @@
 <section class="bg-gray-100 hover:bg-gray-200 duration-300">
-    <div class="flex justify-between px-6">
+    <div class="flex justify-between px-6 truncate">
         <div class="flex items-center">
             <p class="font-bold text-[30px] font-serif text-shadow-xl">Event</p>
         </div>
-        <div class="flex items-center">
-            <a class="font-bold truncate text-gray-600 hover:text-shadow-green-100 text-shadow-lg" href="#">RESIGTERED MEMBER</a>
+        <div class="flex flex-col items-center">
+            <a class="not mt-2 font-bold truncate text-gray-600 hover:text-shadow-green-100 text-shadow-lg" href="#">RESIGTERED MEMBER</a>
+            <p class="notification">Only Admin can see this!</p>
         </div>
         <div class="flex items-center">
-            <a class="font-bold text-green-900 hover:text-green-400" href="{% url 'member_login' %}"> LOGIN</a>
-            <a class="font-bold text-green-900 ms-5 hover:text-green-400" href="{% url 'member_register' %}">REGISTER</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'member_profile' %}">{{user.name}}</a>
+            {% else %}
+                <a class="font-bold text-green-900 hover:text-green-400" href="{% url 'member_login' %}"> LOGIN</a>
+                <a class="font-bold text-green-900 ms-5 hover:text-green-400" href="{% url 'member_register' %}">REGISTER</a>
+            {% endif %}
         </div>
     </div>
 </section>

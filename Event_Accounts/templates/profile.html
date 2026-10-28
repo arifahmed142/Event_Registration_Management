@@ -1,0 +1,43 @@
+{% extends "acc_base.html" %}
+{% load static %}
+{% block title %}
+    {% if user.is_authenticated %}
+        {{ user.name}}
+    {% else %}
+        No Name
+    {% endif %}
+{% endblock title %}
+
+{% block form_title %}
+    Profile View
+{% endblock form_title %}
+
+{% block form %}
+    <div class="mt-6" align="center">
+        {% if user.profile_photo %}
+            <img src="{{user.profile_photo.url}}" class="h-[200px] w-[200px] rounded-xl" alt="Profile">
+        {% else %}
+            <img src="{% static 'Event_Accounts/images/avatar.png' %}" class="h-[200px] w-[200px] rounded-xl" alt="Profile">
+        {% endif %}
+        <p class="font-medium uppercase">{{user.name}}</p>
+        <br>
+        <table>
+            <tr>
+                <td class="px-5">Email:</td>
+                <td class="px-5">{{user.email}}</td>
+                <td class="px-5"><a href="#">Edit</a></td>
+            </tr>
+            <hr class="mx-12">
+            <tr>
+                <td class="px-5">Phone:</td>
+                <td class="px-5">{{user.phone}}</td>
+                <td class="px-5"><a href="#">Edit</a></td>
+            </tr>
+        </table>
+    </div>
+    <br><br>
+    <form action="{% url 'member_logout' %}" align="center" method="post">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-400 h-[30px] w-[80px] font-bold text-gray-800 hover:bg-red-300">LOG OUT</button>
+    </form>
+{% endblock form %}
